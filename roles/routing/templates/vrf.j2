@@ -3,6 +3,5 @@
 {% for vrf in vrfs %}
 vrf definition {{ vrf.tenant }}
    rd {{ vrf.rd }}
-
 ip routing vrf {{ vrf.tenant }}
 {% endfor %}

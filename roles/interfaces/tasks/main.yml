@@ -3,17 +3,17 @@
 - name: Build physical interface configuration
   template: 
     src: physical.j2
-    dest: "configs/{{ inventory_hostname }}/build/physical.cfg"
+    dest: "configs/{{ inventory_hostname }}/build/d-physical.cfg"
   when: phy_interfaces is defined
 
 - name: Build loopback interface configurations
   template:
     src: loopbacks.j2
-    dest: "configs/{{ inventory_hostname }}/build/loopbacks.cfg"
+    dest: "configs/{{ inventory_hostname }}/build/e-loopbacks.cfg"
   when: loopbacks is defined
 
 - name: Build SVI configurations
   template:
     src: svis.j2
-    dest: "configs/{{ inventory_hostname }}/build/svis.cfg"
+    dest: "configs/{{ inventory_hostname }}/build/f-svis.cfg"
   when: svis is defined

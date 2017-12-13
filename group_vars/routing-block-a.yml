@@ -4,8 +4,6 @@
 vrfs:
   - tenant: tenant1
     rd: "11:11"
-  - tenant: tenant2
-    rd: "22:22"
 
 acls:
   - tenant: tenant1
@@ -30,12 +28,6 @@ acls:
         dst_port: 443
   - tenant: tenant1
     name: shared
-  - tenant: tenant2
-    name: web
-  - tenant: tenant2
-    name: app
-  - tenant: tenant2
-    name: db
     
 #############################################
 

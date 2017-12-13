@@ -14,17 +14,5 @@ tenant_vlans:
     number: 12
     name: db
     vni: 10012
-  - tenant: tenant2
-    number: 13
-    name: web 
-    vni: 10013
-  - tenant: tenant2
-    number: 14
-    name: app
-    vni: 10014
-  - tenant: tenant2
-    number: 15
-    name: db
-    vni: 10015
 
 ###############################################

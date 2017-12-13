@@ -3,12 +3,12 @@
 - name: Build VRF configuration
   template: 
     src: vrf.j2
-    dest: "configs/{{ inventory_hostname }}/build/vrf.cfg"
+    dest: "configs/{{ inventory_hostname }}/build/a-vrf.cfg"
   when: vrfs is defined
 
 - name: Build BGP configuration
   template:
     src: bgp.j2
-    dest: "configs/{{ inventory_hostname }}/build/bgp.cfg"
+    dest: "configs/{{ inventory_hostname }}/build/j-bgp.cfg"
   when: bgp is defined
 

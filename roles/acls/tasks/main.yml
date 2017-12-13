@@ -4,6 +4,6 @@
 - name: Build Tenant ACL Configurations
   template:
     src: acls.j2
-    dest: "configs/{{ inventory_hostname }}/build/acls.cfg"
+    dest: "configs/{{ inventory_hostname }}/build/g-acls.cfg"
   when: acls is defined
 

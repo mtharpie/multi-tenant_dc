@@ -7,9 +7,5 @@ edge_vlans:
     number: 13
     name: edge
     vni: 10013
-  - tenant: tenant2
-    number: 18
-    name: edge
-    vni: 10018
 
 ###############################################

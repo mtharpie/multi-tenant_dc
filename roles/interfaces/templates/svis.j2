@@ -15,6 +15,6 @@ interface Vlan{{ svi.number }}
    ip virtual-router address {{ svi.ip_addr_v }}
 {% endif %}
 {% if svi.acl is defined %}
-   ip access-group {{ svi.tenant }}-{{ svi.name }} in
+{#   ip access-group {{ svi.tenant }}-{{ svi.name }} in #}
 {% endif %}
 {% endfor %}
