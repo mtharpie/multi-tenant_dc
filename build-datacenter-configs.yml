@@ -28,7 +28,7 @@
     - name: Assemble static configlets to build folder
       assemble:
         src: "configs/{{ inventory_hostname }}/static/"
-        dest: "configs/{{ inventory_hostname }}/build/assembled-static.cfg"
+        dest: "configs/{{ inventory_hostname }}/build/z-assembled-static.cfg"
 
     - name: Assemble configlet snippets for all devices
       assemble:
