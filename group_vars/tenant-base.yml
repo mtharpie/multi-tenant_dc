@@ -1,4 +1,12 @@
 ---
+## Tenant vlans start at 10
+## one for each application tier (3 total)
+## one for shared and edge routing (2 total)
+## Example:
+## Tenant 1 = 10-12
+## Tenant 2 = 15-17
+## Tenant 3 = 20-22
+
 ########## Update for new Tenants #############
 
 tenant_vlans:

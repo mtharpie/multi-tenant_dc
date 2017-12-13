@@ -69,14 +69,14 @@ bgp:
 ########### update for host ################
 
   vrfs:
-  - tenant: tenant1
-    neighbors:
-      - ip_addr: 10.0.0.2
-        as: 65005
-        rm_in: edge-ingress
-      - ip_addr: 10.0.0.6
-        as: 65003
-        rm_in: shared-ingress
-    redistribute_connected: yes 
+    - tenant: tenant1
+      neighbors:
+        - ip_addr: 10.0.0.2
+          as: 65005
+          rm_in: edge-ingress
+        - ip_addr: 10.0.0.6
+          as: 65003
+          rm_in: shared-ingress
+      redistribute_connected: yes
 
 ############################################## 
