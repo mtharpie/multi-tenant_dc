@@ -1,0 +1,26 @@
+{# template for configuring bgp #}
+{# bgp must be defined under host_vars #}
+{# optionally bgp_vrfs can be defined for vrf aware routing #}
+
+router bgp {{ bgp.local_as }}
+   router-id {{ bgp.router_id }}
+{% for neighbor in bgp.neighbors %}
+   neighbor {{ neighbor.ip_addr }} remote-as {{ neighbor.as }}
+{% endfor %}
+{% for network in bgp.networks %}
+   network {{ network.subnet }}
+{% endfor %}
+{% if bgp.vrfs is defined %}
+{% for vrf in bgp.vrfs %}
+   vrf {{ vrf.tenant }}
+{% for neighbor in vrf.neighbors %}
+      neighbor {{ neighbor.ip_addr }} remote-as {{ neighbor.as }}
+{% if neighbor.rm_in is defined %}
+      neighbor {{ neighbor.ip_addr }} route-map {{ neighbor.rm_in }} in
+{% endif %}
+{% endfor %}
+{% if vrf.redistribute_connected is defined %}
+      redistribute connected
+{% endif %}
+{% endfor %}
+{% endif %}

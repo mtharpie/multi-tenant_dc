@@ -1,0 +1,46 @@
+{# Builds vxlan configruation based on #}
+{# tenant_vlans, edge_vlans and shared_vlans #}
+
+{% set vxlan = [] %}
+{% if tenant_vlans is defined %}
+{% for vlan in tenant_vlans %}
+{% if vlan.vni is defined %}
+{% if vxlan.append(True) %} {% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if edge_vlans is defined %}
+{% for vlan in edge_vlans %}
+{% if vlan.vni is defined %}
+{% if vxlan.append(True) %} {% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if shared_vlans is defined %}
+{% for vlan in shared_vlans %}
+{% if vlan.vni is defined %}
+{% if vxlan.append(True) %} {% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if vxlan %}
+interface Vxlan1
+   vxlan source-interface Loopback1
+   vxlan controller-client
+   vxlan udp-port 4789
+{% if tenant_vlans is defined %}
+{% for vlan in tenant_vlans %}
+   vxlan vlan {{ vlan.number }} vni {{ vlan.vni }}
+{% endfor %}
+{% endif %}
+{% if edge_vlans is defined %}
+{% for vlan in edge_vlans %}
+   vxlan vlan {{ vlan.number }} vni {{ vlan.vni }}
+{% endfor %}
+{% endif %}
+{% if shared_vlans is defined %}
+{% for vlan in shared_vlans %}
+   vxlan vlan {{ vlan.number }} vni {{ vlan.vni }}
+{% endfor %}
+{% endif %}
+{% endif %}

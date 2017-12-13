@@ -1,0 +1,85 @@
+---
+phy_interfaces:
+  - name: Ethernet1
+    description: shared-eth0
+    mode: trunk
+  - name: Ethernet2
+    description: spine1-eth3
+    mode: routed
+    ip_addr: 10.1.0.9/30
+
+loopbacks:
+  - name: Loopback0
+    description: router-id
+    ip_addr: 3.3.3.3/32
+  - name: Loopback1
+    description: vxlan-source-int
+    ip_addr: 33.33.33.33/32
+
+local_vlans:
+  - number: 4000
+    name: dns
+  - number: 4001
+    name: snmp
+  - number: 4002
+    name: dns
+
+svis:
+  - number: 4000
+    name: backup
+    ip_addr: 172.16.20.2/24
+    ip_addr_v: 172.16.20.1/24
+  - number: 4001
+    name: snmp
+    ip_addr: 172.16.21.2/24
+    ip_addr_v: 172.16.21.1/24
+  - number: 4002
+    name: dns
+    ip_addr: 172.16.22.2/24
+    ip_addr_v: 172.16.22.1/24
+
+########## Update for new Tenants #############
+
+  - number: 14
+    tenant: tenant1
+    name: services
+    ip_addr: 10.0.0.6/30
+    acl: yes
+  - number: 19
+    tenant: tenant2
+    name: services
+    ip_addr: 10.0.0.14/30
+    acl: yes
+
+
+###############################################
+
+bgp:
+  local_as: 65003
+  router_id: 3.3.3.3
+  neighbors:
+    - ip_addr: 10.1.0.10
+      as: 65000
+      rm_out: services-adv
+
+########## Update for new Tenants #############
+
+    - ip_addr: 10.0.0.5
+      as: 65002
+      rm_in: tenant1-services
+      rm_out: shared-egress
+    - ip_addr: 10.0.0.13
+      as: 65002
+      rm_in: tenant2-services
+      rm_out: shared-egress
+
+
+###############################################
+
+  networks:
+    - subnet: 3.3.3.3.3/32
+    - subnet: 33.33.33.33/32
+    - subnet: 172.16.20.0/24
+    - subnet: 172.16.21.0/24
+    - subnet: 172.16.22.0/24
+

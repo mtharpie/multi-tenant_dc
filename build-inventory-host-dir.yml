@@ -1,0 +1,21 @@
+---
+## Playbook to build configuration for tenant routing
+
+- name: Build all tenants routing configurations
+  hosts: all
+  gather_facts: no
+  connection: local
+  tasks:
+    - name: build main config directory for inventory host
+      file:
+        path: "configs/{{ inventory_hostname }}"
+        state: directory
+    
+    - name: build sub directories for inventory host
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "configs/{{ inventory_hostname }}/static"
+        - "configs/{{ inventory_hostname }}/build"
+

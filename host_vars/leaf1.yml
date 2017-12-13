@@ -1,0 +1,27 @@
+---
+phy_interfaces:
+  - name: Ethernet1
+    description: server1-eth0
+    mode: trunk
+  - name: Ethernet2
+    description: spine1-eth1
+    mode: routed
+    ip_addr: 10.1.0.1/30
+
+loopbacks:
+  - name: Loopback0
+    description: router-id
+    ip_addr: 1.1.1.1/32
+  - name: Loopback1
+    description: vxlan-source-int
+    ip_addr: 11.11.11.11/32
+
+bgp:
+  local_as: 65001
+  router_id: 1.1.1.1
+  neighbors:
+    - ip_addr: 10.1.0.2
+      as: 65000
+  networks:
+    - subnet: 1.1.1.1/32
+    - subnet: 11.11.11.11/32

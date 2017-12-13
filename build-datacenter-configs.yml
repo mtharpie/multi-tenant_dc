@@ -1,0 +1,36 @@
+---
+## Playbook to build configuration for tenant routing
+
+- name: Build all tenants routing configurations
+  hosts: all
+  gather_facts: no
+  connection: local
+  pre_tasks:
+    - name: find all files to clean up
+      find:
+        paths: "configs/{{ inventory_hostname }}/build/"
+        patterns: "*.cfg"
+      register: cleanup_files
+   
+    - name: delete all files that are marked for cleanup
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ cleanup_files.files }}"
+
+  roles:
+    - interfaces
+    - vlans-vni
+    - routing
+    - acls
+  
+  post_tasks:
+    - name: Assemble static configlets to build folder
+      assemble:
+        src: "configs/{{ inventory_hostname }}/static/"
+        dest: "configs/{{ inventory_hostname }}/build/assembled-static.cfg"
+
+    - name: Assemble configlet snippets for all devices
+      assemble:
+        src: "configs/{{ inventory_hostname }}/build/"
+        dest: "configs/{{ inventory_hostname }}/{{ inventory_hostname }}.cfg"

@@ -1,0 +1,42 @@
+---
+########## Update for new Tenants #############
+
+shared_vlans:
+  - tenant: tenant1
+    number: 14
+    name: shared
+    vni: 10014
+
+acls:
+  - tenant: tenant1
+    name: services
+
+###############################################
+
+route_maps:
+  - name: edge-ingress
+    sequences:
+      - number: 10
+        action: permit
+        match: edge-prefixes
+  - name: shared-ingress
+    sequences:
+      - number: 10
+        action: permit
+        match: shared-prefixes
+
+prefix_lists:
+  - name: edge-prefixes
+    sequences:
+      - number: 10
+        network: 0.0.0.0/0
+      - number: 20
+        network: 8.8.8.8/32
+  - name: shared-prefixes
+    sequences:
+      - number: 10
+        network: 172.16.20.0/24
+      - number: 20
+        network: 172.16.21.0/24
+      - number: 30
+        network: 172.16.22.0/24

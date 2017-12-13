@@ -1,0 +1,12 @@
+{# must define loopbacks in host_vars #}
+
+{% for int in loopbacks %}
+interface {{ int.name }}
+   description {{ int.description }}
+{% if int.ip_addr is defined %}
+   ip address {{ int.ip_addr }}
+{% endif %}
+{% if int.secondary_ip is defined %}
+   ip address {{ int.secondary_ip }} secondary
+{% endif %}
+{% endfor %}

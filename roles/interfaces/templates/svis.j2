@@ -1,0 +1,20 @@
+{# must define svis #}
+
+{% for svi in svis %}
+interface Vlan{{ svi.number }}
+{% if svi.tenant is defined %}
+   description {{ svi.tenant }}-{{ svi.name }}
+{% if svi.vrf is defined %}
+   vrf forwarding {{ svi.tenant }}
+{% endif %}
+{% else %}
+   description {{ svi.name }}
+{% endif %}
+   ip address {{ svi.ip_addr }}
+{% if svi.ip_addr_v is defined %}
+   ip virtual-router address {{ svi.ip_addr_v }}
+{% endif %}
+{% if svi.acl is defined %}
+   ip access-group {{ svi.tenant }}-{{ svi.name }} in
+{% endif %}
+{% endfor %}

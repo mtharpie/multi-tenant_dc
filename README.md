@@ -1,3 +1,4 @@
-# multi-tenant_dc
+# multi-tenant dc
 
-This repo is for a demo that will automate build new tenants for a multi-tenant dc
+Project to show how to deploy multi-tenant dc with ansible
+

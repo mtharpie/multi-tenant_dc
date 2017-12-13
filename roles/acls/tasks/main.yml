@@ -1,0 +1,9 @@
+---
+## Tasks for building routing components
+
+- name: Build Tenant ACL Configurations
+  template:
+    src: acls.j2
+    dest: "configs/{{ inventory_hostname }}/build/acls.cfg"
+  when: acls is defined
+

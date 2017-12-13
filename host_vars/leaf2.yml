@@ -1,0 +1,121 @@
+---
+phy_interfaces:
+  - name: Ethernet1
+    description: server2-eth0
+    mode: trunk
+  - name: Ethernet2
+    description: spine1-eth2
+    mode: routed
+    ip_addr: 10.1.0.5/30
+
+loopbacks:
+  - name: Loopback0
+    description: router-id
+    ip_addr: 2.2.2.2/32
+  - name: Loopback1
+    description: vxlan-source-int
+    ip_addr: 22.22.22.22/32
+    secondary_ip: 10.10.10.10/32
+
+########## Update for new Tenants #############
+
+svis:
+  - number: 10
+    tenant: tenant1
+    name: web
+    ip_addr: 192.168.10.2/24
+    ip_addr_v: 192.168.10.1
+    acl: yes
+    vrf: yes
+  - number: 11
+    tenant: tenant1
+    name: app
+    ip_addr: 192.168.11.2/24
+    ip_addr_v: 192.168.11.1
+    acl: yes
+    vrf: yes
+  - number: 12
+    tenant: tenant1
+    name: db
+    ip_addr: 192.168.12.2/24
+    ip_addr_v: 192.168.12.1
+    acl: yes
+    vrf: yes
+  - number: 13
+    tenant: tenant1
+    name: edge
+    ip_addr: 10.0.0.1/30
+    vrf: yes
+  - number: 14
+    tenant: tenant1
+    name: shared
+    ip_addr: 10.0.0.5/30
+    acl: yes
+    vrf: yes
+  - number: 15
+    tenant: tenant2
+    name: web
+    ip_addr: 192.168.15.2/24
+    ip_addr_v: 192.168.15.1
+    acl: yes
+    vrf: yes
+  - number: 16
+    tenant: tenant2
+    name: app
+    ip_addr: 192.168.16.2/24
+    ip_addr_v: 192.168.16.1
+    acl: yes
+    vrf: yes
+  - number: 17
+    tenant: tenant2
+    name: db
+    ip_addr: 192.168.17.2/24
+    ip_addr_v: 192.168.17.1
+    acl: yes
+    vrf: yes
+  - number: 18
+    tenant: tenant2
+    name: edge
+    ip_addr: 10.0.0.9/30
+    vrf: yes
+  - number: 19
+    tenant: tenant2
+    name: shared
+    ip_addr: 10.0.0.13/30
+    acl: yes
+    vrf: yes
+
+bgp:
+  local_as: 65002
+  router_id: 2.2.2.2
+  neighbors:
+    - ip_addr: 10.1.0.6
+      as: 65000
+  networks:
+    - subnet: 2.2.2.2/32
+    - subnet: 22.22.22.22/32
+    - subnet: 10.10.10.10/32
+
+########### update for host ################
+
+  vrfs:
+  - tenant: tenant1
+    neighbors:
+      - ip_addr: 10.0.0.2
+        as: 65005
+        rm_in: edge-ingress
+      - ip_addr: 10.0.0.6
+        as: 65003
+        rm_in: shared-ingress
+    redistribute_connected: yes 
+  - tenant: tenant2
+    neighbors:
+      - ip_addr: 10.0.0.10
+        as: 65005
+        rm_in: edge-ingress
+      - ip_addr: 10.0.0.14
+        as: 65003
+        rm_in: shared-ingress
+    redistribute_connected: yes 
+
+############################################## 

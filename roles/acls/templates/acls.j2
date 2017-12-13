@@ -1,0 +1,41 @@
+{# must define acls under acls and have tenant subnets configured #}
+
+{% for acl in acls %}
+{% if acl.tenant is defined %}
+ip access-list {{ acl.tenant }}-{{ acl.name }}
+{% else %}
+ip access-list {{ acl.name }}
+{% endif %}
+{% if acl.name == 'web' %}
+   permit tcp {{ tenants[acl.tenant]['subnets']['web'] }} eq 443 any
+   permit ip {{ tenants[acl.tenant]['subnets']['web'] }} {{ tenants[acl.tenant]['subnets']['app'] }}
+{% elif acl.name == 'app' %}
+   permit ip {{ tenants[acl.tenant]['subnets']['app'] }} {{ tenants[acl.tenant]['subnets']['web'] }}
+   permit ip {{ tenants[acl.tenant]['subnets']['app'] }} {{ tenants[acl.tenant]['subnets']['db'] }}
+{% elif acl.name == 'db' %}
+   permit ip {{ tenants[acl.tenant]['subnets']['db'] }} {{ tenants[acl.tenant]['subnets']['app'] }}
+{% elif acl.name == 'shared' %}
+{% for service in shared_services %}
+   permit {{ service.type }} {{ service.network }} eq {{ service.port }} any
+{% endfor %}
+{% elif acl.name == 'services' %}
+{% for service in shared_services %}
+   permit {{ service.type }} {{ tenants[acl.tenant]['subnets']['web'] }} {{ service.network }} eq {{ service.port }}
+   permit {{ service.type }} {{ tenants[acl.tenant]['subnets']['app'] }} {{ service.network }} eq {{ service.port }}
+   permit {{ service.type }} {{ tenants[acl.tenant]['subnets']['db'] }} {{ service.network }} eq {{ service.port }}
+{% endfor %}
+{% endif %}
+{% if acl.rules is defined %}
+{% for rule in acl.rules %}
+{% if rule.src_port is defined and rule.dst_port is defined %}
+   {{ rule.action }} {{ rule.type }} {{ rule.src }} eq {{ rule.src_port }} {{ rule.dst }} eq {{ rule.dst_port }}
+{% elif rule.src_port is defined %}
+   {{ rule.action }} {{ rule.type }} {{ rule.src }} eq {{ rule.src_port }} {{ rule.dst }}
+{% elif rule.dst_port is defined %}
+   {{ rule.action }} {{ rule.type }} {{ rule.src }} {{ rule.dst }} eq {{ rule.dst_port }}
+{% else %}
+   {{ rule.action }} ip {{ rule.src }} {{ rule.dst }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}

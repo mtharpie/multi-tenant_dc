@@ -1,0 +1,21 @@
+{# must define phy_interfaces in host_vars #}
+
+{% for int in phy_interfaces %}
+interface {{ int.name }}
+   description {{ int.description }}
+{% if int.mode is defined %}
+{% if int.mode == 'trunk' %}
+   switchport mode trunk
+{% elif int.mode == 'routed' %}
+   no switchport
+{% if int.ip_addr is defined %}
+   ip address {{ int.ip_addr }}
+{% endif %}
+{% elif int.mode == 'access' %}
+   switchport mode access
+{% if int.access_vlan is defined %}
+   switchport access vlan {{ int.access_vlan }}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
