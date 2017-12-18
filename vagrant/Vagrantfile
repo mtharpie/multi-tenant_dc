@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-    config.vm.box = "vEOS"
+    config.vm.box = "vEOS-4.20"
 
     config.vm.define "leaf1" do |leaf1|
         leaf1.vm.provision "shell", path: "scripts/ztp.sh"
