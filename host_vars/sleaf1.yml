@@ -45,7 +45,11 @@ svis:
     name: services
     ip_addr: 10.0.0.6/30
     acl: yes
-
+  - number: 19
+    tenant: tenant2
+    name: services
+    ip_addr: 10.0.0.14/30
+    acl: yes
 
 ###############################################
 
@@ -62,6 +66,10 @@ bgp:
     - ip_addr: 10.0.0.5
       as: 65002
       rm_in: tenant1-services-ingress
+      rm_out: shared-egress
+    - ip_addr: 10.0.0.13
+      as: 65002
+      rm_in: tenant2-services-ingress
       rm_out: shared-egress
 
 ###############################################

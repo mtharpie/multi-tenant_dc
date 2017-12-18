@@ -4,17 +4,23 @@
 acls:
   - tenant: tenant1
     name: services
+  - tenant: tenant2
+    name: services
 
 route_maps:
   - name: shared-egress
 
   - tenant: tenant1
     name: services-ingress
+  - tenant: tenant2
+    name: services-ingress
 
 prefix_lists:
   - name: shared-egress
-  
+
   - tenant: tenant1
+    name: services-ingress
+  - tenant: tenant2
     name: services-ingress
 
 ###############################################
