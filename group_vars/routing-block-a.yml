@@ -28,32 +28,20 @@ acls:
         dst_port: 443
   - tenant: tenant1
     name: shared
-    
-#############################################
 
 route_maps:
-  - name: edge-ingress
-    sequences:
-      - number: 10
-        action: permit
-        match: edge-prefixes
-  - name: shared-ingress
-    sequences:
-      - number: 10
-        action: permit
-        match: shared-prefixes
+  - tenant: tenant1
+    name: edge-ingress
+  - tenant: tenant1
+    name: shared-ingress
 
 prefix_lists:
-  - name: edge-prefixes
-    sequences:
-      - number: 10
-        network: 0.0.0.0/0
-      - number: 20
-        network: 8.8.8.8/32
-  - name: shared-prefixes
-    sequences:
-      - number: 10
-        network: 172.16.20.0/24
-      - number: 20
-        network: 172.16.21.0/24
+  - tenant: tenant1
+    name: edge-ingress
+  - tenant: tenant1
+    name: shared-ingress
+
+#############################################
+
+
 

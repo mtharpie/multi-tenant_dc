@@ -1,0 +1,20 @@
+{# must define route_maps #}
+
+{% for map in route_maps %}
+{% if map.name == 'edge-ingress' and map.tenant is defined %}
+route-map {{ map.tenant }}-{{ map.name}} permit 10
+   match ip address prefix-list {{ map.tenant }}-{{ map.name}}
+{% endif %}
+{% if map.name == 'shared-ingress' and map.tenant is defined %}
+route-map {{ map.tenant }}-{{ map.name}} permit 10
+   match ip address prefix-list {{ map.tenant }}-{{ map.name}}
+{% endif %}
+{% if map.name == 'services-ingress' and map.tenant is defined %}
+route-map {{ map.tenant }}-{{ map.name}} permit 10
+   match ip address prefix-list {{ map.tenant }}-{{ map.name}}
+{% endif %}
+{% if map.name == 'shared-egress' %}
+route-map {{ map.name}} permit 10
+   match ip address prefix-list {{ map.name}}
+{% endif %}
+{% endfor %}

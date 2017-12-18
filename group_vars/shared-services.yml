@@ -1,0 +1,22 @@
+---
+########## Update for new Tenants #############
+
+acls:
+  - tenant: tenant1
+    name: services
+
+route_maps:
+  - name: shared-egress
+
+  - tenant: tenant1
+    name: services-ingress
+
+prefix_lists:
+  - name: shared-egress
+  
+  - tenant: tenant1
+    name: services-ingress
+
+###############################################
+
+

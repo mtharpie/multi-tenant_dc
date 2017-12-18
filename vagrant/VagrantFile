@@ -26,9 +26,20 @@ Vagrant.configure(2) do |config|
             end
         end
 
+    config.vm.define "leaf3" do |leaf3|
+        leaf3.vm.provision "shell", path: "scripts/ztp.sh"
+        leaf3.vm.network "forwarded_port", guest: 80, host: 8082
+        leaf3.vm.network "private_network", virtualbox__intnet: true, auto_config: false
+        leaf3.vm.network "private_network", virtualbox__intnet: true, auto_config: false
+        leaf3.vm.provider "virtualbox" do |v|
+            v.customize ["modifyvm", :id, "--nic2", "intnet", "--intnet2", "leaf3-eth1"]
+            v.customize ["modifyvm", :id, "--nic3", "intnet", "--intnet3", "leaf3-spine1"]
+            end
+        end
+
     config.vm.define "sleaf1" do |sleaf1|
         sleaf1.vm.provision "shell", path: "scripts/ztp.sh"
-        sleaf1.vm.network "forwarded_port", guest: 80, host: 8082
+        sleaf1.vm.network "forwarded_port", guest: 80, host: 8083
         sleaf1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         sleaf1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         sleaf1.vm.provider "virtualbox" do |v|
@@ -39,7 +50,7 @@ Vagrant.configure(2) do |config|
 
     config.vm.define "eleaf1" do |eleaf1|
         eleaf1.vm.provision "shell", path: "scripts/ztp.sh"
-        eleaf1.vm.network "forwarded_port", guest: 80, host: 8083
+        eleaf1.vm.network "forwarded_port", guest: 80, host: 8084
         eleaf1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         eleaf1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         eleaf1.vm.provider "virtualbox" do |v|
@@ -50,7 +61,8 @@ Vagrant.configure(2) do |config|
 
     config.vm.define "spine1" do |spine1|
         spine1.vm.provision "shell", path: "scripts/ztp.sh"
-        spine1.vm.network "forwarded_port", guest: 80, host: 8084
+        spine1.vm.network "forwarded_port", guest: 80, host: 8085
+        spine1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         spine1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         spine1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         spine1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
@@ -59,9 +71,10 @@ Vagrant.configure(2) do |config|
         spine1.vm.provider "virtualbox" do |v|
             v.customize ["modifyvm", :id, "--nic2", "intnet", "--intnet2", "leaf1-spine1"]
             v.customize ["modifyvm", :id, "--nic3", "intnet", "--intnet3", "leaf2-spine1"]
-            v.customize ["modifyvm", :id, "--nic4", "intnet", "--intnet3", "sleaf1-spine1"]
-            v.customize ["modifyvm", :id, "--nic5", "intnet", "--intnet3", "eleaf1-spine1"]
-            v.customize ["modifyvm", :id, "--nic6", "intnet", "--intnet3", "leaf3-spine1"]
+            v.customize ["modifyvm", :id, "--nic6", "intnet", "--intnet4", "leaf3-spine1"]
+            v.customize ["modifyvm", :id, "--nic4", "intnet", "--intnet5", "sleaf1-spine1"]
+            v.customize ["modifyvm", :id, "--nic5", "intnet", "--intnet6", "eleaf1-spine1"]
+
             end
         end
 end

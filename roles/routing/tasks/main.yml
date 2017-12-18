@@ -12,3 +12,14 @@
     dest: "configs/{{ inventory_hostname }}/build/j-bgp.cfg"
   when: bgp is defined
 
+- name: Build prefix-list configuration
+  template:
+    src: prefix-lists.j2
+    dest: "configs/{{ inventory_hostname }}/build/k-prefixlists.cfg"
+  when: prefix_lists is defined
+
+- name: Build route-map configuration
+  template:
+    src: route-maps.j2
+    dest: "configs/{{ inventory_hostname }}/build/l-routemaps.cfg"
+  when: route_maps is defined

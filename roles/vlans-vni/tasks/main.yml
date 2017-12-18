@@ -4,10 +4,10 @@
   template:
     src: vlans.j2
     dest: "configs/{{ inventory_hostname }}/build/b-vlans.cfg"
-  when: local_vlans is defined or tenant_vlans is defined or shared_vlans is defined or edge_vlans is defined
+  when: local_vlans is defined or tenant_vlans is defined
 
 - name: Build Vxlan Configurations
   template:
     src: vxlan.j2
     dest: "configs/{{ inventory_hostname }}/build/c-vxlan.cfg"
-  when: tenant_vlans is defined or shared_vlans is defined or edge_vlans is defined
+  when: tenant_vlans is defined or shared_vlans is defined

@@ -6,6 +6,12 @@ router bgp {{ bgp.local_as }}
    router-id {{ bgp.router_id }}
 {% for neighbor in bgp.neighbors %}
    neighbor {{ neighbor.ip_addr }} remote-as {{ neighbor.as }}
+{% if neighbor.rm_in is defined %}
+   neighbor {{ neighbor.ip_addr }} route-map {{ neighbor.rm_in }} in
+{% endif %}
+{% if neighbor.rm_out is defined %}
+   neighbor {{ neighbor.ip_addr }} route-map {{ neighbor.rm_out }} out
+{% endif %}
 {% endfor %}
 {% for network in bgp.networks %}
    network {{ network.subnet }}

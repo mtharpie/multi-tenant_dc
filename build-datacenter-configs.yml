@@ -5,18 +5,6 @@
   hosts: all
   gather_facts: no
   connection: local
-  pre_tasks:
-    - name: find all files to clean up
-      find:
-        paths: "configs/{{ inventory_hostname }}/build/"
-        patterns: "*.cfg"
-      register: cleanup_files
-   
-    - name: delete all files that are marked for cleanup
-      file:
-        path: "{{ item.path }}"
-        state: absent
-      with_items: "{{ cleanup_files.files }}"
 
   roles:
     - interfaces

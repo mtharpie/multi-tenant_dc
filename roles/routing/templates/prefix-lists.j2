@@ -1,0 +1,29 @@
+{# must define prefix_lists #}
+
+{% for list in prefix_lists %}
+{% if list.tenant is defined %}
+ip prefix-list {{ list.tenant }}-{{ list.name }}
+{% else %}
+ip prefix-list {{ list.name }}
+{% endif %}
+{% if list.name == 'edge-ingress' %}
+{% for network in edge_prefixes %}
+   permit {{ network.network }}
+{% endfor %}
+{% endif %}
+{% if list.name == 'shared-ingress' %}
+{% for network in shared_prefixes %}
+   permit {{ network.network }}
+{% endfor %}
+{% endif %}
+{% if list.name == 'services-ingress' %}
+   permit {{ tenants[list.tenant]['subnets']['web'] }}
+   permit {{ tenants[list.tenant]['subnets']['app'] }}
+   permit {{ tenants[list.tenant]['subnets']['db'] }}
+{% endif %}
+{% if list.name == 'shared-egress' %}
+{% for network in shared_prefixes %}
+   permit {{ network.network }}
+{% endfor %}
+{% endif %}
+{% endfor %}

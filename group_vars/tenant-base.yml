@@ -22,5 +22,13 @@ tenant_vlans:
     number: 12
     name: db
     vni: 10012
+  - tenant: tenant1
+    number: 13
+    name: edge
+    vni: 10013
+  - tenant: tenant1
+    number: 14
+    name: shared
+    vni: 10014
 
 ###############################################

@@ -46,6 +46,7 @@ svis:
     ip_addr: 10.0.0.6/30
     acl: yes
 
+
 ###############################################
 
 bgp:
@@ -54,13 +55,13 @@ bgp:
   neighbors:
     - ip_addr: 10.1.0.10
       as: 65000
-      rm_out: services-adv
+      rm_out: shared-egress
 
 ########## Update for new Tenants #############
 
     - ip_addr: 10.0.0.5
       as: 65002
-      rm_in: tenant1-services
+      rm_in: tenant1-services-ingress
       rm_out: shared-egress
 
 ###############################################

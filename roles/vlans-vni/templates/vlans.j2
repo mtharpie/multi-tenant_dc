@@ -12,15 +12,3 @@ vlan {{ vlan.number }}
    name {{ vlan.tenant }}-{{ vlan.name }}
 {% endfor %}
 {% endif %}
-{% if edge_vlans is defined %}
-{% for vlan in edge_vlans %}
-vlan {{ vlan.number }}
-   name {{ vlan.tenant }}-{{ vlan.name }}
-{% endfor %}
-{% endif %}
-{% if shared_vlans is defined %}
-{% for vlan in shared_vlans %}
-vlan {{ vlan.number }}
-   name {{ vlan.tenant }}-{{ vlan.name }}
-{% endfor %}
-{% endif %}

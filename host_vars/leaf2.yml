@@ -73,10 +73,10 @@ bgp:
       neighbors:
         - ip_addr: 10.0.0.2
           as: 65005
-          rm_in: edge-ingress
+          rm_in: tenant1-edge-ingress
         - ip_addr: 10.0.0.6
           as: 65003
-          rm_in: shared-ingress
+          rm_in: tenant1-shared-ingress
       redistribute_connected: yes
 
 ############################################## 

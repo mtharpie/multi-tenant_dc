@@ -1,23 +1,8 @@
-{# Builds vxlan configruation based on #}
-{# tenant_vlans, edge_vlans and shared_vlans #}
+{# Builds vxlan configruation based on tenant_vlans#}
 
 {% set vxlan = [] %}
 {% if tenant_vlans is defined %}
 {% for vlan in tenant_vlans %}
-{% if vlan.vni is defined %}
-{% if vxlan.append(True) %} {% endif %}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% if edge_vlans is defined %}
-{% for vlan in edge_vlans %}
-{% if vlan.vni is defined %}
-{% if vxlan.append(True) %} {% endif %}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% if shared_vlans is defined %}
-{% for vlan in shared_vlans %}
 {% if vlan.vni is defined %}
 {% if vxlan.append(True) %} {% endif %}
 {% endif %}
