@@ -1,0 +1,13 @@
+---
+## Playbook to build configuration for tenant routing
+
+- name: Build all tenants routing configurations
+  hosts: all
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: Push configurations to inventory
+      eos_config:
+        src: "configs/{{ inventory_hostname }}/{{ inventory_hostname }}.cfg"
+
