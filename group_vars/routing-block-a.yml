@@ -4,6 +4,8 @@
 vrfs:
   - tenant: tenant1
     rd: "11:11"
+  - tenant: tenant2
+    rd: "22:22"
 
 acls:
   - tenant: tenant1
@@ -14,17 +16,33 @@ acls:
     name: db
   - tenant: tenant1
     name: shared
+  - tenant: tenant2
+    name: web
+  - tenant: tenant2
+    name: app
+  - tenant: tenant2
+    name: db
+  - tenant: tenant2
+    name: shared  
 
 route_maps:
   - tenant: tenant1
     name: edge-ingress
   - tenant: tenant1
     name: shared-ingress
+  - tenant: tenant2
+    name: edge-ingress
+  - tenant: tenant2
+    name: shared-ingress
 
 prefix_lists:
   - tenant: tenant1
     name: edge-ingress
   - tenant: tenant1
+    name: shared-ingress
+  - tenant: tenant2
+    name: edge-ingress
+  - tenant: tenant2
     name: shared-ingress
 
 #############################################
