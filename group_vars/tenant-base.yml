@@ -30,25 +30,5 @@ tenant_vlans:
     number: 14
     name: shared
     vni: 10014
-  - tenant: tenant2
-    number: 15
-    name: web
-    vni: 10015
-  - tenant: tenant2
-    number: 16
-    name: app
-    vni: 10016
-  - tenant: tenant2
-    number: 17
-    name: db
-    vni: 10017
-  - tenant: tenant2
-    number: 18
-    name: edge
-    vni: 10018
-  - tenant: tenant2
-    number: 19
-    name: shared
-    vni: 10019
 
 ###############################################
