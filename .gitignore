@@ -1,0 +1,5 @@
+# git ignore file
+
+configs/**/build/
+*.DS_Store
+*.retry
