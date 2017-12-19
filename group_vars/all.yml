@@ -55,9 +55,9 @@ shared_services:
 provider:
   username: ansible-user
   password: arista123
-  host: "{{ inventory_ip }}"
+  host: "{{ inventory_hostname }}"
   transport: eapi
   use_ssl: no
   authorize: yes
-  port: "{{ inventory_port }}"
+  port: "{{ eapi_port }}"
   timeout: 30

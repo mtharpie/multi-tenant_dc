@@ -1,0 +1,16 @@
+{# template for configuring standards #}
+
+hostname {{ inventory_hostname }}
+
+ntp server 1.1.1.1
+
+ip virtual-router mac-address aa:bb:aa:bb:00:01
+
+ip routing
+
+management api http-commands
+   protocol http
+   no shutdown
+
+management cvx
+   server host 5.5.5.5

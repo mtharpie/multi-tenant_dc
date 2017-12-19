@@ -46,7 +46,7 @@ tenant_vlans:
     number: 18
     name: edge
     vni: 10018
-  - tenant: tenant1
+  - tenant: tenant2
     number: 19
     name: shared
     vni: 10019

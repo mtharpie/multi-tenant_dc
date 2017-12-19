@@ -1,0 +1,7 @@
+---
+
+- name: Build standards configuration
+  template: 
+    src: standards.j2
+    dest: "configs/{{ inventory_hostname }}/build/x-vrf.cfg"
+

@@ -10,4 +10,5 @@
     - name: Push configurations to inventory
       eos_config:
         src: "configs/{{ inventory_hostname }}/{{ inventory_hostname }}.cfg"
-
+        replace: config
+        provider: "{{ provider }}"
