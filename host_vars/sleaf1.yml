@@ -6,15 +6,15 @@ phy_interfaces:
   - name: Ethernet2
     description: spine1-eth3
     mode: routed
-    ip_addr: 10.1.0.9/30
+    ip_addr: 10.1.0.13/30
 
 loopbacks:
   - name: Loopback0
     description: router-id
-    ip_addr: 3.3.3.3/32
+    ip_addr: 4.4.4.4/32
   - name: Loopback1
     description: vxlan-source-int
-    ip_addr: 33.33.33.33/32
+    ip_addr: 44.44.44.44/32
 
 local_vlans:
   - number: 4000
@@ -54,10 +54,10 @@ svis:
 ###############################################
 
 bgp:
-  local_as: 65003
-  router_id: 3.3.3.3
+  local_as: 65004
+  router_id: 4.4.4.4
   neighbors:
-    - ip_addr: 10.1.0.10
+    - ip_addr: 10.1.0.14
       as: 65000
       rm_out: shared-egress
 
@@ -75,8 +75,8 @@ bgp:
 ###############################################
 
   networks:
-    - subnet: 3.3.3.3.3/32
-    - subnet: 33.33.33.33/32
+    - subnet: 4.4.4.4/32
+    - subnet: 44.44.44.44/32
     - subnet: 172.16.20.0/24
     - subnet: 172.16.21.0/24
     - subnet: 172.16.22.0/24

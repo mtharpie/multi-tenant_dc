@@ -104,7 +104,7 @@ bgp:
     - tenant: tenant1
       neighbors:
         - ip_addr: 10.0.0.2
-          as: 65005
+          as: 65006
           rm_in: tenant1-edge-ingress
         - ip_addr: 10.0.0.6
           as: 65003
@@ -113,7 +113,7 @@ bgp:
     - tenant: tenant2
       neighbors:
         - ip_addr: 10.0.0.10
-          as: 65005
+          as: 65006
           rm_in: tenant2-edge-ingress
         - ip_addr: 10.0.0.14
           as: 65003

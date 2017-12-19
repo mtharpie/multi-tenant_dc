@@ -9,17 +9,17 @@ phy_interfaces:
     mode: routed
     ip_addr: 10.1.0.6/30
   - name: Ethernet3
-    description: leaf2-eth2
+    description: leaf3-eth2
     mode: routed
-    ip_addr: 10.1.0.18/30
+    ip_addr: 10.1.0.10/30
   - name: Ethernet4
     description: sleaf1-eth2
     mode: routed
-    ip_addr: 10.1.0.10/30
+    ip_addr: 10.1.0.14/30
   - name: Ethernet5
     description: eleaf-eth2
     mode: routed
-    ip_addr: 10.1.0.14/30
+    ip_addr: 10.1.0.18/30
 
 loopbacks:
   - name: Loopback0

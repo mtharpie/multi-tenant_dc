@@ -4,24 +4,24 @@ phy_interfaces:
     description: fw-eth0
     mode: trunk
   - name: Ethernet2
-    description: spine1-eth4
+    description: spine1-eth5
     mode: routed
-    ip_addr: 10.1.0.13/30
+    ip_addr: 10.1.0.17/30
 
 loopbacks:
   - name: Loopback0
     description: router-id
-    ip_addr: 4.4.4.4/32
+    ip_addr: 5.5.5.5/32
   - name: Loopback1
     description: vxlan-source-int
-    ip_addr: 44.44.44.44/32
+    ip_addr: 55.55.55.55/32
 
 bgp:
-  local_as: 65001
-  router_id: 1.1.1.1
+  local_as: 65005
+  router_id: 5.5.5.5
   neighbors:
-    - ip_addr: 10.1.0.14
+    - ip_addr: 10.1.0.18
       as: 65000
   networks:
-    - subnet: 4.4.4.4/32
-    - subnet: 44.44.44.44/32
+    - subnet: 5.5.5.5/32
+    - subnet: 55.55.55.55/32

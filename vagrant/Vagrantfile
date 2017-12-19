@@ -67,7 +67,6 @@ Vagrant.configure(2) do |config|
         spine1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         spine1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         spine1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
-        spine1.vm.network "private_network", virtualbox__intnet: true, auto_config: false
         spine1.vm.provider "virtualbox" do |v|
             v.customize ["modifyvm", :id, "--nic2", "intnet", "--intnet2", "leaf1-spine1"]
             v.customize ["modifyvm", :id, "--nic3", "intnet", "--intnet3", "leaf2-spine1"]
