@@ -52,6 +52,38 @@ svis:
     ip_addr: 10.0.0.5/30
     acl: yes
     vrf: yes
+  - number: 15
+    tenant: tenant2
+    name: web
+    ip_addr: 192.168.15.2/24
+    ip_addr_v: 192.168.15.1
+    acl: yes
+    vrf: yes
+  - number: 16
+    tenant: tenant2
+    name: app
+    ip_addr: 192.168.16.2/24
+    ip_addr_v: 192.168.16.1
+    acl: yes
+    vrf: yes
+  - number: 17
+    tenant: tenant2
+    name: db
+    ip_addr: 192.168.17.2/24
+    ip_addr_v: 192.168.17.1
+    acl: yes
+    vrf: yes
+  - number: 18
+    tenant: tenant2
+    name: edge
+    ip_addr: 10.0.0.9/30
+    vrf: yes
+  - number: 19
+    tenant: tenant2
+    name: shared
+    ip_addr: 10.0.0.13/30
+    acl: yes
+    vrf: yes
 
 ############################################## 
 
@@ -77,6 +109,15 @@ bgp:
         - ip_addr: 10.0.0.6
           as: 65003
           rm_in: tenant1-shared-ingress
+      redistribute_connected: yes
+    - tenant: tenant2
+      neighbors:
+        - ip_addr: 10.0.0.10
+          as: 65006
+          rm_in: tenant2-edge-ingress
+        - ip_addr: 10.0.0.14
+          as: 65003
+          rm_in: tenant2-shared-ingress
       redistribute_connected: yes
 
 ############################################## 
