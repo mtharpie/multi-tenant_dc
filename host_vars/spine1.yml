@@ -9,14 +9,10 @@ phy_interfaces:
     mode: routed
     ip_addr: 10.1.0.6/30
   - name: Ethernet3
-    description: leaf3-eth2
-    mode: routed
-    ip_addr: 10.1.0.10/30
-  - name: Ethernet4
     description: sleaf1-eth2
     mode: routed
     ip_addr: 10.1.0.14/30
-  - name: Ethernet5
+  - name: Ethernet4
     description: eleaf-eth2
     mode: routed
     ip_addr: 10.1.0.18/30
@@ -34,8 +30,6 @@ bgp:
       as: 65001
     - ip_addr: 10.1.0.5
       as: 65002
-    - ip_addr: 10.1.0.9
-      as: 65003
     - ip_addr: 10.1.0.13
       as: 65004
     - ip_addr: 10.1.0.17
